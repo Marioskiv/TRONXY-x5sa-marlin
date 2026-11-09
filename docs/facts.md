@@ -19,9 +19,15 @@
 ## Assumptions (NOT verified)
 - "V8 board = Chitu V5 pinout" (community claim, Configurations README).
 - WiFi socket J1 = USART3 (PB10 TX / PB11 RX), pin 2 = 5 V, pin 4 = 3.3 V. Confirmed by the X5SA schematic
-  (docs/hardware/wifi-socket.md), but that schematic's revision is unknown -> still to verify on the V8.
+  (docs/hardware/wifi-socket.md) AND by Tronxy's own Marlin pin file (PB11 "wifi:TX", PB10 "wifi:RX").
+  Two independent sources; still to measure on our V8.
 - MCU is 512 KB (ZET6) – ID 0x0414 also covers 256/384 KB parts. Needs chip photo.
 - WiFi socket supply/logic voltage – needs measurement (ESP8266 is 3.3 V only).
+
+## Strong evidence (manufacturer code, not yet measured)
+- Power-loss detect PG2 + PG4, I2C EEPROM AT24Cxx on PG0/PG1 (WP PF12), Z max PA13, Z2 driver PF5/PF1/PF3
+  (docs/research/tronxy-official-marlin-f103.md).
+- Linear Advance with standalone TMC2208/2225 is unreliable (forum reports); needs UART mod or spreadCycle.
 
 ## Open items owed by owner
 - [ ] Klipper backup (step 1)
