@@ -11,6 +11,10 @@
 - Runtime config / WiFi / debug plan (`docs/plan-runtime-config-wifi-debug.md`).
 - Klipper vs Marlin feature list incl. adaptive mesh (`docs/klipper-vs-marlin.md`).
 
+## DIRECTION CHANGE (2026-11-09)
+Owner chose **Klipper on a dedicated Raspberry Pi** with a **serial (UART) link** and a **touchscreen**
+-> see `docs/plan-klipper-pi.md`. Marlin plan kept as fallback.
+
 ## Decisions taken by owner
 - UI language English. Screen should be nice and helpful.
 - More research welcome; all findings stored in `docs/research/`.
