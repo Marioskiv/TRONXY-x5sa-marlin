@@ -6,7 +6,7 @@
 | Marlin `pins_CHITU3D_V6.h` -> `x5sa-main_board-2.pdf` (Altium, 2019-06-03) | read | Full MCU schematic; WiFi J1 = USART3 PB10/PB11 (see wifi-socket.md). Revision not printed. |
 | hackaday.io project 167594 "Chitu 3D Printer Mainboard Hacking" (J.C. Nelson) | read | Bootloader/update.cbd encryption; author of Marlin `chitu_f103` env. No pinout for V8. |
 | ESP3D discussion #706 | read | Users report 5 V on CH_PD and GPIO0 grounded when an ESP-01 is plugged into the socket. |
-| tronxy.fandom.com "TronXY Mainboard Documentation" | **blocked** (Cloudflare challenge) | Said to host per-board pinout PDFs. Owner must save the page/PDFs manually. |
+| tronxy.fandom.com "TronXY Mainboard Documentation" | **blocked** (Cloudflare challenge); text copied by owner | Section "TronXY CXY-V8-20190729": "The V8 is the third of Tronxys modern mainboards. It is commonly found on X5SA/D01/XY-2Pro printers and can be configured in Marlin as a V5 due to it's similarities. Some models were manufactured in 2019." No pinout in the text; pinout files (if any) still to be fetched by owner. |
 
 ## Notes from hackaday 167594 (relevant to us)
 - Chitu bootloader decrypts `update.cbd`; Marlin's `chitu_f103` env produces that file (merged in Marlin 2020).
