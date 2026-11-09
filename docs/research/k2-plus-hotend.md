@@ -17,3 +17,14 @@ Owner: hotend is from a Creality K2 Plus; flow is not the limiting factor.
   -> Need: heater voltage/power label, how it is wired (ribbon or separate cable), board fuse rating.
 - Max temp in Marlin set from the real hotend limit (300 C -> HEATER_0_MAXTEMP ~315), and thermal
   runaway protection stays ON.
+
+## Owner decision (2026-11-09): external power for the hotend
+Plan (to confirm with owner's parts):
+- External MOSFET module (heater module), switched by the board's hotend output (PG12 / HEATER_0).
+  Board then only drives the module input -> no 4 A through board/ribbon.
+- Module must keep the heater **OFF when its input floats** (pull-down on input): during reset, USB
+  flashing (ROM bootloader) or a crash, PG12 is an unconfigured input.
+- Isolated (optocoupler) module, or common GND between PSUs as the module's datasheet says.
+- Inline fuse on the external supply (~6-7 A for a 100 W/24 V heater), wire >= 0.75 mm2 (18 AWG).
+- Supply voltage must match the heater label (check before connecting).
+- Thermistor stays on the board (PA1). Marlin thermal protection works unchanged (it controls the module).
