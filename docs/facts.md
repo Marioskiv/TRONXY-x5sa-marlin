@@ -24,6 +24,8 @@
   flashed "via USB with the jumper removed" and shows "Bootloader offset (No bootloader)".
   If true, the Chitu bootloader at 0x08000000 was overwritten and update.cbd no longer works.
   -> check Tronxy klipper `.config` (CONFIG_FLASH_START) or the vector table in klipper.bin.
+  Owner (2026-11-09): does not remember, but says the note in printer.cfg is true -> treat as
+  **probably no Chitu bootloader any more** until proven otherwise.
 
 ## Assumptions (NOT verified)
 - "V8 board = Chitu V5 pinout" (community claim, Configurations README).
@@ -37,6 +39,11 @@
 - Power-loss detect PG2 + PG4, I2C EEPROM AT24Cxx on PG0/PG1 (WP PF12), Z max PA13, Z2 driver PF5/PF1/PF3
   (docs/research/tronxy-official-marlin-f103.md).
 - Linear Advance with standalone TMC2208/2225 is unreliable (forum reports); needs UART mod or spreadCycle.
+
+## Hardware changes in progress (owner, 2026-11-09)
+- Hotend: upgrade not finished -> thermistor type TBD (Klipper today: ATC Semitec 104GT-2).
+- Extruder: will be "HGX pulse 562", drive ratio 9.54647:1 -> E steps/mm TBD (need motor step angle
+  and the maker's rotation distance / steps value).
 
 ## Open items owed by owner
 - [ ] Klipper backup (step 1)
