@@ -20,6 +20,7 @@
 | File upload over network | ESP3D upload to SD via serial | SLOWER |
 | Thumbnails on screen | Galaxy UI (QOI thumbnails) | EXPERIMENTAL on our MCU |
 | Print history / statistics | PRINTCOUNTER | BASIC |
+| Power-loss recovery (Klipper had none) | POWER_LOSS_RECOVERY (M413), SD prints only | NEW in Marlin (see research/power-loss-recovery.md) |
 | Webcam, timelapse, Spoolman | - | NO |
 | Accelerometer resonance test | - | NO |
 
