@@ -40,3 +40,17 @@ The Marlin work stays in the repo (docs/plan-*.md, docs/research/) as a fallback
 ## Still open (same as before)
 - Bootloader offset of the current Klipper build (FLASH_START).
 - K2 Plus thermistor values; HGX extruder rotation distance; J1 measurements.
+
+## Option: old tablet as the touchscreen (owner question 2026-11-09)
+- **Use the whole tablet**, not its bare LCD panel. A bare tablet panel (MIPI-DSI/eDP/LVDS, proprietary
+  connector) needs a matching controller board and drivers; usually not worth it.
+- Ways to use the tablet:
+  1. Browser in full screen/kiosk mode showing **Mainsail** (complete UI, touch works).
+  2. **KlipperScreen on Android** (KlipperScreen docs: Android via an X server app such as XSDL; can run
+     over USB with ADB for a wired link).
+  3. Klipper mobile apps (e.g. Mobileraker).
+- Link tablet <-> Pi: WiFi, or wired via USB (USB tethering / ADB) for stability.
+- Power the tablet from the 24->5 V buck through USB.
+- **Battery safety**: a lithium battery kept at 100 % charge 24/7 can swell. Use the tablet's charge
+  limit if it has one, a smart plug/timer, or check the battery regularly.
+- Old Android/iOS browsers may be too old for current Mainsail -> need tablet model + OS version.
