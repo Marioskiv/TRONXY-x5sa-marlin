@@ -8,13 +8,22 @@
 | MCU | STM32F103 high density, stm32flash ID 0x0414, 8 MHz crystal |
 | Bootloader | Chitu, app at 0x08008800, updates via `update.cbd` on SD |
 | Klipper | currently works; its `printer.cfg` is the pin reference |
-| Z probe | works on `^!PA14` (pull-up, inverted) |
+| Z probe | works on `!PA14` (inverted; cfg has no Klipper pull-up) |
+| Klipper cfg | `backup/klipper/pasted/printer.cfg`: all pins = Marlin CHITU3D_V5 (docs/pin-comparison.md) |
+| Steppers | 32 microsteps all axes; X/Y rd 40, Z rd 8, E Titan clone rd 22.478 66:22 |
+| Thermistors (Klipper) | hotend ATC Semitec 104GT-2, bed EPCOS 100K |
 | Stock firmware | Chitu V1.4.1RC26m4, UI Colorful 0.8 |
 
 ## Read from Marlin source in an earlier session (to be re-checked in step 2)
 - `env:chitu_f103`: genericSTM32F103ZE, offset 0x8800, outputs `update.cbd`.
 - `Configurations/Tronxy/X5SA Pro` uses BOARD_CHITU3D_V6 (probe PG9) -> not a direct match.
 - `pins_CHITU3D_common.h` only DISABLE_JTAG -> PA13/PA14 remain SWD; probe on PA14 may need DISABLE_DEBUG.
+
+## CONFLICT to resolve
+- Bootloader: owner's fact says Chitu bootloader + update.cbd. But printer.cfg header says Klipper was
+  flashed "via USB with the jumper removed" and shows "Bootloader offset (No bootloader)".
+  If true, the Chitu bootloader at 0x08000000 was overwritten and update.cbd no longer works.
+  -> check Tronxy klipper `.config` (CONFIG_FLASH_START) or the vector table in klipper.bin.
 
 ## Assumptions (NOT verified)
 - "V8 board = Chitu V5 pinout" (community claim, Configurations README).
