@@ -28,3 +28,20 @@ Plan (to confirm with owner's parts):
 - Inline fuse on the external supply (~6-7 A for a 100 W/24 V heater), wire >= 0.75 mm2 (18 AWG).
 - Supply voltage must match the heater label (check before connecting).
 - Thermistor stays on the board (PA1). Marlin thermal protection works unchanged (it controls the module).
+
+## Board hotend output (X5SA schematic, same family as our V8)
+- Net HOT-END1 (MCU PG12) goes straight to the gate of **Q6 HY1403** (N-MOSFET, low-side switch),
+  with **R23 10 k pull-down** gate->GND. Connector **JP6** (KF301 2-pin): pin 1 = supply (+), pin 2 = Q6 drain.
+  -> When PG12 floats (reset, USB flashing, crash), R23 keeps Q6 **off**. So a module driven from JP6
+  is off too, as long as the module itself does not turn on with an open input (normal for these modules).
+- Bed: HOT-BED -> 8050 transistors -> Q5 RU30120L, R27 10 k pull-down. Part fan: Q7 AO3400A.
+- Rail label in the schematic is "VCC_12V" = main input rail (24 V on this printer).
+
+## Owner's candidate module (AliExpress, 2026-11-09)
+"3D Printer Hot Bed Power Expansion Board Heating Controller MOSFET High Current Load Module 25A 30A 12or24V".
+Listing not readable from here. Generic assessment:
+- 25-30 A rating: far above 4.2 A -> OK.
+- Wiring: module IN <- board JP6 (hotend output); module POWER IN <- external PSU (with fuse);
+  module OUT -> heater.
+- If the listing does **not** say optocoupler/isolated: connect external PSU V- to main PSU V- (common GND).
+- Check on arrival: no heater power when the board is off / unplugged from the module input.
