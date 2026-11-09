@@ -15,7 +15,9 @@
   while in USB host (OTG) mode; battery at 100 % 24/7 can swell.
 
 ## Rules (from the owner, keep them)
-- Never use stm32flash; never write to 0x08000000. **Do not flash the printer.**
+- Owner decision 2026-11-09: the old rule "no stm32flash / no writes to 0x08000000" was arbitrary and is **dropped**.
+  Goal: make flashing as easy as possible (USB with BOOT jumper, stm32flash or SD, whichever is simplest).
+  Claude still does not flash the printer itself; the owner flashes. Explain each step first.
 - Explain every change first and wait for OK. Do not root, unlock the bootloader, flash a ROM or wipe the
   phone without explicit OK (unlocking the bootloader erases the phone).
 - Separate verified facts from assumptions. Do not invent values. Say exactly what measurement/photo is needed.

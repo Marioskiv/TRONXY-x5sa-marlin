@@ -22,5 +22,5 @@
 - Bootloader leaves hardware half-initialised; Marlin has custom init code for this
   (`chitu_v5_gpio_init` / CHITU_V5_Z_MIN_BUGFIX env exists for related issues).
 - Files: `chitucrypt.py` (encrypt/decrypt update.cbd), `chitutronxybootloader.bin`
-  (bootloader dump; **never** to be written by us, rule: no writes to 0x08000000).
+  (bootloader dump; the old "no writes to 0x08000000" rule was dropped by the owner on 2026-11-09; still write only with owner OK).
   `chitucrypt.py` could later turn a stock Chitu firmware back into an update.cbd for recovery.

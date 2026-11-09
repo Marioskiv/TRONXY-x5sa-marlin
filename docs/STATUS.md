@@ -25,7 +25,7 @@ Owner chose **Klipper on a dedicated Raspberry Pi** with a **serial (UART) link*
    -> Chitu bootloader probably overwritten -> update.cbd may not work.
    Next: owner runs `grep FLASH_START ~/klipper/.config`, `ls ~/klipper/out/`, `find ~ -name "*.cbd"`.
    Then owner chooses: A) Marlin by USB each time, B) restore a bootloader once by USB then SD updates,
-   (rules about 0x08000000 would need an owner decision for A or B).
+   (owner dropped the 0x08000000 / stm32flash rule on 2026-11-09; pick whichever is easiest).
 2. Hotend upgrade unfinished -> thermistor type.
 3. Extruder -> "HGX pulse 562", ratio 9.54647:1 -> need maker's steps/rotation distance + motor step angle.
 

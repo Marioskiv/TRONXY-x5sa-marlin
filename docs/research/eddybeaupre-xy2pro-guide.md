@@ -8,7 +8,7 @@ It uses a forked Marlin config (`XY2_V6_255_NO_TITAN_TMC`), not upstream Configu
 
 ## Useful points
 1. Warning in the guide: "newer Tronxy firmware doesn't read the update.cbd file". Their workaround is
-   flashing at 0x08000000 over USB with the STM32 ROM bootloader. **Not allowed by our rules.**
+   flashing at 0x08000000 over USB with the STM32 ROM bootloader. (The old rule against this was dropped by the owner on 2026-11-09; allowed if it is the easiest way.)
    For us: Klipper is already installed and updated via update.cbd on this board (verified by owner),
    so our bootloader accepts update.cbd. To confirm: Klipper was installed via update.cbd, not by USB flashing.
 2. On the V6, the board jumpers are: **BOOT** (normally fitted) and a **5V / USB** power jumper
@@ -16,7 +16,7 @@ It uses a forked Marlin config (`XY2_V6_255_NO_TITAN_TMC`), not upstream Configu
    The V8 likely has similar jumpers (JP1 BOOT next to USB per Marlin PR #15493 comments) -> photo needed.
 3. Their "firmware backup" = full flash **read** (bootloader + app) with ST Flash Loader Demonstrator in
    ROM bootloader mode. It is a read, not a write, but it needs BOOT jumper changes and is the same tool
-   class as stm32flash. Out of our rules unless the owner decides otherwise. Today it would also capture
+   class as stm32flash. No longer excluded (owner dropped the rule on 2026-11-09). Today it would also capture
    Klipper, not stock Chitu.
 4. Stock-firmware settings backup trick: `M6046` + `M8512 "currentconfig.gcode"` (Chitu firmware only,
    useless while Klipper runs).

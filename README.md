@@ -12,8 +12,9 @@ authored in this repository (notes, scripts, config deltas), not Marlin sources.
 - `docs/facts.md`   – verified facts vs. assumptions, kept up to date
 
 ## Safety rules
-- No stm32flash, never write to 0x08000000 (Chitu bootloader lives there).
-- Firmware is installed only by the owner, via `update.cbd` on SD.
+- Owner decision 2026-11-09: the former rule "no stm32flash / no writes to 0x08000000" is dropped.
+  Choose the easiest flashing method (USB + BOOT jumper, stm32flash, or `update.cbd` on SD).
+- Firmware is installed only by the owner; Claude explains the steps first.
 
 ## Work order
 1. Back up Klipper files  <- current
