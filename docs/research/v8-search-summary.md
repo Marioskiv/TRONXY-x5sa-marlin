@@ -34,3 +34,17 @@ No public V8 pinout exists. The best references are, in order:
 1. our own working Klipper `printer.cfg` (verified on this exact board),
 2. the X5SA schematic (strong match: PA14 = Z-MINUS-STOP, WiFi = USART3),
 3. our own measurements/photos and, after flashing, `M43` pin debugging.
+
+## Follow-up search (same day)
+- **Darkwulf183/Marlin-2.1.2.9-ALL-UI-...-STM32F103** (GitHub, updated 2026-11): multi-machine Marlin
+  config for Chitu V5/V6/V9 with `chitu_f103`. Relevant lines:
+  - `//#define LINEAR_ADVANCE  //Board conversion https://bit.ly/3zCrela is mandatory!`
+    -> Linear Advance on these boards needs a **hardware change** to the drivers. Known general issue:
+    TMC2208/2225 in standalone **stealthChop** mode lose extruder steps with Linear Advance; the usual fix is
+    spreadCycle (CFG pin change) or UART mode. **Link target unknown** (bit.ly is blocked here) -> owner to open it.
+  - `WIFI_MODULE_NOT_PRESENT // ... WiFi header pin 6 (PD12) is free for the BLTouch servo`
+    -> another numbering of the WiFi header (our schematic calls PD12 "J1 pin 3"). Confirms PD12 on the header.
+  - Probe signal: "V6: PG9, V5/V9: PA14". Z steps "800 for the TMC boards".
+  - Marlin now has `BOARD_CHITU3D_V9` (board "V9 200420").
+- Not reachable from this session: forum.drucktipps3d.de (German X5SA tutorial; one post says stock Chitu
+  firmware on V8 limits acceleration), forum.makerforums.info, bit.ly.
