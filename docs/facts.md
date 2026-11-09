@@ -18,7 +18,8 @@
 
 ## Assumptions (NOT verified)
 - "V8 board = Chitu V5 pinout" (community claim, Configurations README).
-- WiFi socket = USART3 (PB10/PB11).
+- WiFi socket J1 = USART3 (PB10 TX / PB11 RX), pin 2 = 5 V, pin 4 = 3.3 V. Confirmed by the X5SA schematic
+  (docs/hardware/wifi-socket.md), but that schematic's revision is unknown -> still to verify on the V8.
 - MCU is 512 KB (ZET6) – ID 0x0414 also covers 256/384 KB parts. Needs chip photo.
 - WiFi socket supply/logic voltage – needs measurement (ESP8266 is 3.3 V only).
 
