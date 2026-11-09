@@ -45,3 +45,12 @@ Listing not readable from here. Generic assessment:
   module OUT -> heater.
 - If the listing does **not** say optocoupler/isolated: connect external PSU V- to main PSU V- (common GND).
 - Check on arrival: no heater power when the board is off / unplugged from the module input.
+
+## Module chosen (listing screenshot from owner, 2026-11-09)
+`docs/hardware/images/hotend-mosfet-module-listing.jpg` - HuiSheng DongYe (HSDY) "Heated Bed Power Module":
+4 screw terminals (DC IN -, DC IN +, HOT BED -, HOT BED +), 2-pin input plug from the mainboard's heater
+output, large MOSFET. Seller diagram powers it from the same PSU and drives it from the board's bed output.
+For us: input plug -> board **hotend** output JP6; DC IN -> **external PSU** (with fuse); HOT BED +/- -> K2 heater.
+Optocoupler on input: **not visible in the picture** -> check for a 4-pin chip marked 817 (PC817/EL817)
+near the input plug. Decision: connect both PSUs' V- together in any case (safe with or without opto).
+Input polarity: plug + to JP6 pin 1 (supply), - to JP6 pin 2 (switched).
