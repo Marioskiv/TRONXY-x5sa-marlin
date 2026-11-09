@@ -41,7 +41,8 @@
 - Linear Advance with standalone TMC2208/2225 is unreliable (forum reports); needs UART mod or spreadCycle.
 
 ## Hardware changes in progress (owner, 2026-11-09)
-- Hotend: upgrade not finished -> thermistor type TBD (Klipper today: ATC Semitec 104GT-2).
+- Hotend: **Creality K2 Plus hotend** (owner). Flow not a limit. Thermistor = Creality custom (TBD);
+  heater reportedly 100 W ceramic -> current check needed (docs/research/k2-plus-hotend.md).
 - Extruder: will be "HGX pulse 562", drive ratio 9.54647:1 -> E steps/mm TBD (need motor step angle
   and the maker's rotation distance / steps value).
 
