@@ -11,6 +11,11 @@
 - Runtime config / WiFi / debug plan (`docs/plan-runtime-config-wifi-debug.md`).
 - Klipper vs Marlin feature list incl. adaptive mesh (`docs/klipper-vs-marlin.md`).
 
+## DIRECTION CHANGE #3 (2026-11-11)
+Owner: wants to keep using the **current Klipper setup** and make it work reliably (no new hardware, no Marlin for now).
+-> Task: diagnose the lost link between the Debian Klipper PC and the Tronxy (instance `printer_TRONXY_data`,
+Moonraker port 7126, MCU `/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0`). Checklist: docs/klipper-link-troubleshooting.md
+
 ## DIRECTION CHANGE #2 (2026-11-11)
 Raspberry Pi Zero 2 W not available anywhere (list price 15 USD, street prices up to 188 EUR); owner does not want a Raspberry.
 -> **Back to the Marlin plan** (stand-alone on the board, original screen, ESP3D WiFi). Klipper-on-Pi plan kept as a later option.
