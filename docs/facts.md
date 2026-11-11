@@ -19,13 +19,11 @@
 - `Configurations/Tronxy/X5SA Pro` uses BOARD_CHITU3D_V6 (probe PG9) -> not a direct match.
 - `pins_CHITU3D_common.h` only DISABLE_JTAG -> PA13/PA14 remain SWD; probe on PA14 may need DISABLE_DEBUG.
 
-## CONFLICT to resolve
-- Bootloader: owner's fact says Chitu bootloader + update.cbd. But printer.cfg header says Klipper was
-  flashed "via USB with the jumper removed" and shows "Bootloader offset (No bootloader)".
-  If true, the Chitu bootloader at 0x08000000 was overwritten and update.cbd no longer works.
-  -> check Tronxy klipper `.config` (CONFIG_FLASH_START) or the vector table in klipper.bin.
-  Owner (2026-11-09): does not remember, but says the note in printer.cfg is true -> treat as
-  **probably no Chitu bootloader any more** until proven otherwise.
+## RESOLVED: the Chitu bootloader is gone (verified 2026-11-09 over SSH, docs/research/phone-host-check.md)
+- Klipper PC `.config`: `CONFIG_STM32_FLASH_START_0000=y` -> Klipper was built for offset 0x0 and flashed
+  at 0x08000000, **overwriting the Chitu bootloader**. `update.cbd` from SD cannot work today.
+- Recovery is always possible: BOOT jumper + USB (STM32 ROM bootloader), `stm32flash` is on the Klipper PC.
+- Candidate bootloader image (hackaday 167594, X5S, 34816 B) is **not verified for the V8**.
 
 ## Assumptions (NOT verified)
 - "V8 board = Chitu V5 pinout" (community claim, Configurations README).
