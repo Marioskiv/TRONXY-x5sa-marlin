@@ -25,3 +25,24 @@ MCU firmware built for USART1 (CH340 USB), offset 0x0 (no bootloader), klipper.b
 ## Next step
 The local session already has SSH access to the Klipper PC: run checks 1-4 read-only there, then propose fixes
 (owner approves each change).
+
+## Owner report (2026-11-11): what actually happens
+- Prints sometimes stop because the **USB link is interrupted**. Cable: 1 m, with ferrite.
+- The host laptop **sometimes powers off**: it has no battery installed and runs from its charger only
+  (a power/cable glitch kills it, and the print).
+- Owner has a second small, old, slow laptop **with a working battery** (not yet checked).
+
+### Reading
+- Klipper aborts the print on any MCU link loss, so host power and USB must be rock solid.
+- A laptop **with a battery acts as a built-in UPS for the host** (survives charger glitches and short power blips).
+- "Slow" is fine: the Klipper host load is small (it runs on a Pi Zero). Needs ~1 GB RAM+, a normal Linux install.
+- Do not mix up two failure types in `klippy.log`:
+  `Lost communication with MCU` / `Serial connection closed` -> cable, EMI, ground loop, host power;
+  `Timer too close` -> host too busy/slow.
+  Check: `grep -nE "Lost communication|Timer too close|MCU shutdown|Serial connection closed|Unable to open serial" ~/printer_TRONXY_data/logs/klippy.log*`
+- Extra for the USB: keep the USB cable away from motor/heater cables; laptop chargers with 2 pins can inject noise
+  (a USB isolator can fix ground-loop problems); "v source" jumper on 5V; disable USB autosuspend.
+
+### Plan
+Dedicated old laptop (battery in good shape, not swollen) as the only host for the Tronxy: clean Debian + KIAUH,
+sleep/suspend/lid-close actions disabled, one printer per host (no by-id name clash).
