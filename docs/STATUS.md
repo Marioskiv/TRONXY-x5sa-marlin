@@ -11,7 +11,12 @@
 - Runtime config / WiFi / debug plan (`docs/plan-runtime-config-wifi-debug.md`).
 - Klipper vs Marlin feature list incl. adaptive mesh (`docs/klipper-vs-marlin.md`).
 
-## DIRECTION CHANGE (2026-11-09)
+## DIRECTION CHANGE #2 (2026-11-11)
+Raspberry Pi Zero 2 W not available anywhere (list price 15 USD, street prices up to 188 EUR); owner does not want a Raspberry.
+-> **Back to the Marlin plan** (stand-alone on the board, original screen, ESP3D WiFi). Klipper-on-Pi plan kept as a later option.
+Open: owner's typical Klipper print speed; `grep FLASH_START` result; how Klipper was flashed (SD or USB).
+
+## DIRECTION CHANGE #1 (2026-11-09)
 Owner chose **Klipper on a dedicated Raspberry Pi** with a **serial (UART) link** and a **touchscreen**
 -> see `docs/plan-klipper-pi.md`. Marlin plan kept as fallback.
 
