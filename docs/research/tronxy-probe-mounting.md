@@ -33,3 +33,12 @@
 - Fix: sensor face must sit LOWER relative to the nozzle tip: target 1.5-2 mm above the tip
   -> trigger with the nozzle 2.0-1.5 mm above the bed. Procedure: nozzle at Z=2 (or a 2 mm spacer), lower the sensor
   until the LED just lights, tighten. Then PROBE_CALIBRATE, PROBE_ACCURACY.
+- Owner re-set the sensor with the nozzle at Z=2: LED lights -> sensor now ~1.5 mm above the nozzle tip.
+
+## Planned bed change: PEI plate (owner, 2026-11-13)
+- Inductive sensor rated distance (8 mm) refers to a steel target; non-ferrous metal (aluminium) gives less (~3.5 mm measured).
+- **PEI on spring steel (magnetic)**: the steel sheet becomes the target -> sensor will trigger noticeably farther
+  away than 3.5 mm (exact value unknown, thin sheet). Sensor height and z_offset must be set again.
+- **PEI film on glass/aluminium (no steel)**: target stays the aluminium; only the surface height changes.
+- Either way: after the plate is fitted, repeat the Z=2 sensor setting, `PROBE_CALIBRATE` with a hot bed,
+  `PROBE_ACCURACY`, new bed mesh. A calibration done now on glass will not be valid afterwards.
