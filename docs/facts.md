@@ -38,6 +38,10 @@
   (docs/research/tronxy-official-marlin-f103.md).
 - Linear Advance with standalone TMC2208/2225 is unreliable (forum reports); needs UART mod or spreadCycle.
 
+## Hotend thermistor (verified 2026-11-13)
+- K2 Plus hotend thermistor measured by owner at room temperature: **~260 kOhm** -> Creality F008 table
+  (25 C / 260000, 220 C / 738, 350 C / 98) is the right one (not the 100 k F021 version).
+
 ## Hardware changes in progress (owner, 2026-11-09)
 - Hotend: **Creality K2 Plus hotend** (owner). Flow not a limit. Thermistor = Creality custom (TBD);
   heater reportedly 100 W ceramic -> current check needed (docs/research/k2-plus-hotend.md).
