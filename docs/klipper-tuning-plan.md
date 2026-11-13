@@ -141,3 +141,6 @@ Optional last fine round (median -0.183): FM CCW 0:09, FR CCW 0:11, RL CW 0:14; 
 FL -0.193 (base), FM -0.106, FR -0.114, RR -0.229, RM -0.160, RL -0.270 -> spread 0.16 mm (1.28 -> 0.56 -> 0.31 -> 0.21 -> 0.16).
 All corrections <= 00:10. Decision: stop adjusting screws; remaining shape is left to the bed mesh.
 Next: PROBE_ACCURACY (range), BED_MESH_CALIBRATE, SAVE_CONFIG, heightmap photo.
+
+## PROBE_ACCURACY (2026-11-13, steel PEI, at probe X130 Y165)
+max 0.035, min 0.00875, **range 0.02625**, average 0.026125, median 0.025, **std dev 0.007383** (10 samples).
