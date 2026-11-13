@@ -132,3 +132,7 @@ Fewest turns: bring all to the median (-0.179); CW = smaller nozzle gap (raise t
 FL -0.195 (base), FM -0.049, FR -0.043, RR -0.311, RM -0.218, RL -0.348 -> spread 0.31 mm (1.28 -> 0.56 -> 0.31).
 Front ~0.2 mm higher than rear. One more round to the median (-0.207): FM CCW 0:19, FR CCW 0:20, RR CW 0:13,
 RL CW 0:17; FL and RM leave. Stop when spread <= ~0.1 mm (or when it is close to the PROBE_ACCURACY range).
+
+## Fourth SCREWS_TILT_CALCULATE (2026-11-13)
+FL -0.195 (base), FM -0.108, FR -0.088, RR -0.232, RM -0.171, RL -0.296 -> spread 0.21 mm.
+Optional last fine round (median -0.183): FM CCW 0:09, FR CCW 0:11, RL CW 0:14; then stop and mesh.
