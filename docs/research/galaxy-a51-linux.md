@@ -27,3 +27,11 @@ services), then long test prints. Recovery from a bad flash is possible with Odi
 Technically plausible as a project, but many unverified links; the dedicated laptop with a battery already gives a
 stable x86 host. Cheap pre-test on Android (no root): does the phone charge while a USB device is attached through a
 powered OTG hub/Y-cable? If not, the phone cannot be a 24/7 USB host anyway.
+
+## Other phones checked (2026-11-13)
+| Phone | postmarketOS | Kernel | Notes |
+|---|---|---|---|
+| Galaxy A53 5G (a53x, Exynos 1280) | device + kernel package in **main** branch, built 2026-01-28 | downstream 5.10 fork | newest kernel of the three; no feature status page found; OTG/charging unknown |
+| Galaxy S6 G920F (zerofltexx, Exynos 7420) | **testing**, fixes up to 2024 | downstream (Exynos7420 tree, LineageOS 17.1 base) | Wi-Fi fix was pending in 2021; 2015 phone, old battery |
+| Huawei Mate 10 Pro (Kirin 970) | no port found | - | Huawei unlock service closed; PotatoNV does not support Kirin 970; only paid/unvetted tools |
+Same open questions for all: USB host mode + charging at the same time under Linux, Klipper never reported on them.
