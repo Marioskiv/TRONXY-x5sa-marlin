@@ -148,3 +148,20 @@ Klipper Probe_Calibrate.md: range > 0.025 mm = "not sufficient accuracy for typi
 Z step (here 8/(200*32) = 0.00125 mm) or ~0.005 mm. Ours 0.02625 = just over the limit (21 Z steps), std dev ok.
 Try: `PROBE_ACCURACY PROBE_SPEED=5` (docs: probe speed / start height can improve repeatability). If better, set
 `speed: 5` in [probe] and add `samples_result: median`, `samples_tolerance: 0.02`, `samples_tolerance_retries: 3`.
+
+## First BED_MESH_CALIBRATE on steel PEI (2026-11-13, 5x5, 3 samples/point, saved with SAVE_CONFIG)
+Median per point (probe coords, rows probed front to back):
+| Y \ X | 20 | 92.5 | 165 | 237.5 | 310 |
+|---|---|---|---|---|---|
+| 20  | +0.521 | +0.485 | +0.515 | +0.536 | +0.504 |
+| 92.5 | +0.223 | +0.249 | +0.285 | +0.289 | +0.288 |
+| 165 | -0.045 | +0.004 | +0.048 | +0.043 | +0.091 |
+| 237.5 | -0.209 | -0.165 | -0.079 | -0.044 | -0.071 |
+| 310 | -0.330 | -0.279 | -0.190 | -0.171 | -0.205 |
+- Samples per point agree within ~0.02 mm -> probe is repeatable.
+- Shape: almost a pure **front-to-back slope of ~0.75 mm** (front high), little left/right change.
+- **Conflict**: the last SCREWS_TILT_CALCULATE showed front vs rear only ~0.1 mm apart at nearly the same Y.
+  Possible causes: bed changed between the two runs (Z lead screws out of sync, sheet moved, bed cold vs hot),
+  or a time-dependent drift (rows were probed front to back, values fall with time). Not resolved yet.
+- Checks: re-run SCREWS_TILT_CALCULATE now without touching screws; run a 2nd mesh and compare; where are the two
+  Z lead screws (front/back or left/right)?
