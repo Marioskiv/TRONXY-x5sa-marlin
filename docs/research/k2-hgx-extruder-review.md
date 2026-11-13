@@ -24,3 +24,31 @@ Config: `backup/klipper/pasted/extruder-k2-hgx.cfg`. Owner continues with Klippe
 6. Check extrusion direction with a short `G1 E10 F60` (invert `dir_pin` if wrong; new gearing may reverse it).
 7. `max_extrude_only_distance: 100`: fine for direct drive; too short for a long Bowden load.
 8. Hotend/part fans on PG14/PG13 switch the board's supply voltage (24 V); K2 fans must match.
+
+## Cross-check against Creality's own Klipper configs (2026-11-13)
+Source: CrealityOfficial/K2_Series_Klipper, `config/F008/printer.cfg`, `config/F008_CR0CN240319C13/printer.cfg`,
+`config/F021_CR0CN200400C10/printer.cfg` (raw files read today).
+
+### Thermistor
+- F008 configs: `[thermistor my_thermistor]` 25 C / 260000, 220 C / 738, 350 C / 98 -> **identical to the owner's table**
+  (so ChatGPT copied it from Creality; correct for that hotend version).
+- **F021 config uses a different thermistor**: 25 C / 98633, 220 C / 377, 320 C / 73 (the 260 k table is commented out).
+  -> Two K2 hotend thermistor versions exist. Test: measure the thermistor at room temperature with a multimeter
+  (disconnected): ~260 k = F008 table, ~100 k = F021 table.
+- Community guide (Tombraider2006/Ender5Max, `mans/k2_hotend.md`) uses the 260 k table for a K2 hotend.
+- Creality reads it on the K2 toolhead board (nozzle_mcu PA0); no pullup_resistor override in the config, so the
+  table is plain resistance and works with our board's 4.7 k pull-up.
+- Creality max_temp: 370 (F008) / 390 (F008_CR0CN240319C13, F021). So max_temp 360 is within Creality's own limits.
+- Creality PID values (e.g. 19.219 / 2.136 / 43.243) are for their board; `pid_*_high_temp` keys are Creality-fork only.
+  Our setup (other board, external MOSFET) -> PID_CALIBRATE anyway.
+
+### Extruder (HGX manual, photo docs/hardware/images/hgx-extruder-manual-parameters.jpg)
+Manual: drive ratio 9.54647:1, **"Pluse" 562**, driving gear 10 T, reduction gear 44 T, extrusion wheel 37 T, 1.75 mm.
+- Owner's config (rotation_distance 22.678 + gear_ratio 9.54647:1) = 1347 steps/mm at 16 microsteps,
+  2694 at 32 -> **2.4x the manual's 562**. 22.678 is the generic Bondtech/Voron drive-gear value, not from this manual.
+- Reading "562" as steps/mm at 16 microsteps with a 1.8 deg motor (assumption, the manual does not say):
+  Klipper `rotation_distance: 5.694` **without** `gear_ratio` (same as 54.357 with gear_ratio 9.54647:1).
+  At our 32 microsteps that is 1124 steps/mm; a 40 mm/s retraction = 45 k steps/s (instead of 108 k).
+- Safer start: the manual's value. If it is wrong it under-extrudes (safe); the 22.678 value would over-extrude 2.4x
+  if the manual is right (grinding/clog). Then calibrate with the 100 mm test.
+- Creality's own K2 extruder (not the HGX): rotation_distance 6.9, microsteps 16, no gear_ratio.
