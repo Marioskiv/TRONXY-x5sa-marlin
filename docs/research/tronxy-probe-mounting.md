@@ -42,3 +42,9 @@
 - **PEI film on glass/aluminium (no steel)**: target stays the aluminium; only the surface height changes.
 - Either way: after the plate is fitted, repeat the Z=2 sensor setting, `PROBE_CALIBRATE` with a hot bed,
   `PROBE_ACCURACY`, new bed mesh. A calibration done now on glass will not be valid afterwards.
+
+## 2026-11-13: magnetic spring-steel PEI fitted
+- Owner fitted a **magnetic spring-steel PEI plate** and re-set the sensor: LED lights with the nozzle **~2 mm** above the plate.
+- Next: check the sensor face clearance above the nozzle tip (should now be larger than 1.5 mm because steel triggers
+  from farther away); `PROBE_CALIBRATE` with a hot bed, `SAVE_CONFIG`; `PROBE_ACCURACY` at the centre and near
+  the corners (`PROBE_ACCURACY` after `G1 X.. Y..`); new `BED_MESH_CALIBRATE`, `SAVE_CONFIG`.
