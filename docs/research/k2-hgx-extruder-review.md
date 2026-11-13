@@ -61,3 +61,12 @@ Manual: drive ratio 9.54647:1, **"Pluse" 562**, driving gear 10 T, reduction gea
 3. `PID_CALIBRATE HEATER=extruder TARGET=250`, then `SAVE_CONFIG`.
 4. Direction (hot): `M83` + `G1 E10 F60` -> filament must go in; else drop `!` from `dir_pin`.
 5. Calibration (hot): mark 120 mm, `M83` + `G1 E100 F60`, measure; new = 5.694 * actual / 100.
+
+## Keeping gear_ratio (owner question 2026-11-13)
+Equivalent settings (both = 562 steps/mm at 16 microsteps, 1124 at 32):
+- `rotation_distance: 5.694` without gear_ratio, or
+- `rotation_distance: 54.357` + `gear_ratio: 9.54647:1` (rotation_distance = distance per turn of the drive wheel).
+Note: 54.357 mm per drive-wheel turn implies a ~17.3 mm effective drive-wheel diameter, which is large; the generic
+22.678 implies ~7.2 mm. The two manual values (9.54647:1 and 562) may not both refer to 16 microsteps / 1.8 deg.
+-> The 100 mm extrusion test decides; with gear_ratio kept: new rotation_distance = 54.357 * actual / 100.
+Measuring the effective diameter of the filament drive gear (caliper) would show which value is plausible.
