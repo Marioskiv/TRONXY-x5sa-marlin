@@ -75,3 +75,16 @@ Use: hot bed, `G28`, `SCREWS_TILT_CALCULATE`, turn screws, repeat until all with
   its [bed_screws] = 5/165/325 x 5/325 (same as the official Klipper template).
 - iamSiiN/JuggernautX5SA (X5SA-400, Manta M8P), marcin-polo/klipper_tronxy (400 bed, 4 screws): other sizes.
 - All use **CW-M3**. Coordinates always depend on the probe offset -> our version: `klipper-config/screws_tilt_adjust.cfg`.
+
+## Two Z motors (owner question 2026-11-13)
+Evidence (not yet seen on the board):
+- printer.cfg has only `[stepper_z]` (PB9/PE0/PE1), no `[stepper_z1]` -> Klipper drives **one** Z driver.
+- V8 is sold with **4** TMC2225 (X, Y, Z, E) (GearBest listing); Tronxy's own pin file has Z2 pins (PF5/PF1/PF3) only
+  for boards with a 5th driver.
+- V8 stock-firmware note: "insert 2 jumpers on the Z2 connector" when only one motor is used -> Z and Z2 sockets are
+  wired **in series on the same driver**.
+=> The two Z motors move together electrically; Klipper cannot align them on its own (Z_TILT_ADJUST needs separate drivers).
+If one side skips (binding), the bed stays tilted until fixed mechanically (power off, turn one lead screw until the bed
+is parallel to the frame, measured at both sides), then screws_tilt_adjust + mesh.
+Checks: photo of the driver chips (4 or 5?), which sockets the two Z motors use, `STEPPER_BUZZ STEPPER=stepper_z`
+(both motors should buzz).
