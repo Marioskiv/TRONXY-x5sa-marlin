@@ -99,3 +99,19 @@ Options:
 3. Independent motors + `Z_TILT_ADJUST`: only with a 5th driver (other board, e.g. Manta M5P).
 Owner 2026-11-13: E2 driver position is empty (not soldered) -> confirmed 4 drivers; Z + Z2 on one driver.
 Populating the empty footprint (fine-pitch TMC chip + passives) is not recommended. Use options 1 or 2 (or 3 with a new board).
+
+## First SCREWS_TILT_CALCULATE (owner, 2026-11-13, steel PEI, before any adjustment)
+Probe Z: front left -1.089 (base), front middle -0.613, front right +0.098, rear right +0.109, rear middle +0.192,
+rear left -0.363 -> spread **1.28 mm**. Left side ~0.8 mm lower than right; front-left corner lowest.
+Klipper output (base = front left): turn the other 5 CCW 00:57, 02:22, 02:24, 02:34, 01:27 (~9.7 turns total).
+Alternative with fewer turns: raise the low points to the highest (rear middle), M3 = 0.5 mm/turn:
+| screw | Z | turn |
+|---|---|---|
+| front left | -1.089 | 2:34 CW |
+| front middle | -0.613 | 1:37 CW |
+| front right | +0.098 | 0:11 CW |
+| rear right | +0.109 | 0:10 CW |
+| rear middle | +0.192 | 0:00 CW |
+| rear left | -0.363 | 1:07 CW |
+First check the Z lead-screw alignment (left/right tilt can come from the two Z motors on one driver), and verify the
+turning direction with a small turn + re-run before turning a lot.
