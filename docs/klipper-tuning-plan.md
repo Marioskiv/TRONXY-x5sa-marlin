@@ -144,3 +144,7 @@ Next: PROBE_ACCURACY (range), BED_MESH_CALIBRATE, SAVE_CONFIG, heightmap photo.
 
 ## PROBE_ACCURACY (2026-11-13, steel PEI, at probe X130 Y165)
 max 0.035, min 0.00875, **range 0.02625**, average 0.026125, median 0.025, **std dev 0.007383** (10 samples).
+Klipper Probe_Calibrate.md: range > 0.025 mm = "not sufficient accuracy for typical bed leveling"; normal is up to one
+Z step (here 8/(200*32) = 0.00125 mm) or ~0.005 mm. Ours 0.02625 = just over the limit (21 Z steps), std dev ok.
+Try: `PROBE_ACCURACY PROBE_SPEED=5` (docs: probe speed / start height can improve repeatability). If better, set
+`speed: 5` in [probe] and add `samples_result: median`, `samples_tolerance: 0.02`, `samples_tolerance_retries: 3`.
