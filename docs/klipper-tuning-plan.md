@@ -136,3 +136,8 @@ RL CW 0:17; FL and RM leave. Stop when spread <= ~0.1 mm (or when it is close to
 ## Fourth SCREWS_TILT_CALCULATE (2026-11-13)
 FL -0.195 (base), FM -0.108, FR -0.088, RR -0.232, RM -0.171, RL -0.296 -> spread 0.21 mm.
 Optional last fine round (median -0.183): FM CCW 0:09, FR CCW 0:11, RL CW 0:14; then stop and mesh.
+
+## Fifth SCREWS_TILT_CALCULATE (2026-11-13) - screws done
+FL -0.193 (base), FM -0.106, FR -0.114, RR -0.229, RM -0.160, RL -0.270 -> spread 0.16 mm (1.28 -> 0.56 -> 0.31 -> 0.21 -> 0.16).
+All corrections <= 00:10. Decision: stop adjusting screws; remaining shape is left to the bed mesh.
+Next: PROBE_ACCURACY (range), BED_MESH_CALIBRATE, SAVE_CONFIG, heightmap photo.
