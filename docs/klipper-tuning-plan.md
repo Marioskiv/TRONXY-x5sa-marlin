@@ -29,6 +29,8 @@ horizontal_move_z: 10
 speed: 100
 screw_thread: CW-M3   # check: M3/M4/M5 and turning direction
 ```
+Owner (2026-11-13): bed has **6 screws, 3 front + 3 rear** (matches the template layout; exact X/Y and thread still to measure).
+With 6 screws: set the 4 corners first, then the 2 middle screws (the plate can bow if the middles are too tight).
 Use: hot bed, `G28`, `SCREWS_TILT_CALCULATE`, turn screws, repeat until all within ~00:03. Then `BED_MESH_CALIBRATE`.
 
 ## 2. Adaptive mesh (built into Klipper, no KAMP needed)
