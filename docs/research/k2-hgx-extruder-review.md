@@ -52,3 +52,12 @@ Manual: drive ratio 9.54647:1, **"Pluse" 562**, driving gear 10 T, reduction gea
 - Safer start: the manual's value. If it is wrong it under-extrudes (safe); the 22.678 value would over-extrude 2.4x
   if the manual is right (grinding/clog). Then calibrate with the 100 mm test.
 - Creality's own K2 extruder (not the HGX): rotation_distance 6.9, microsteps 16, no gear_ratio.
+
+## Owner result 2026-11-13: thermistor ~260 k -> F008 table confirmed.
+
+## Next steps (to do, in this order; owner paused here)
+1. Replace `rotation_distance: 22.678` + `gear_ratio: 9.54647:1` with `rotation_distance: 5.694` (no gear_ratio). RESTART.
+2. First heat to ~200 C: smooth rise, no jumps; compare with an external thermometer if available.
+3. `PID_CALIBRATE HEATER=extruder TARGET=250`, then `SAVE_CONFIG`.
+4. Direction (hot): `M83` + `G1 E10 F60` -> filament must go in; else drop `!` from `dir_pin`.
+5. Calibration (hot): mark 120 mm, `M83` + `G1 E100 F60`, measure; new = 5.694 * actual / 100.
