@@ -76,15 +76,25 @@ Use: hot bed, `G28`, `SCREWS_TILT_CALCULATE`, turn screws, repeat until all with
 - iamSiiN/JuggernautX5SA (X5SA-400, Manta M8P), marcin-polo/klipper_tronxy (400 bed, 4 screws): other sizes.
 - All use **CW-M3**. Coordinates always depend on the probe offset -> our version: `klipper-config/screws_tilt_adjust.cfg`.
 
-## Two Z motors (owner question 2026-11-13)
-Evidence (not yet seen on the board):
-- printer.cfg has only `[stepper_z]` (PB9/PE0/PE1), no `[stepper_z1]` -> Klipper drives **one** Z driver.
-- V8 is sold with **4** TMC2225 (X, Y, Z, E) (GearBest listing); Tronxy's own pin file has Z2 pins (PF5/PF1/PF3) only
-  for boards with a 5th driver.
-- V8 stock-firmware note: "insert 2 jumpers on the Z2 connector" when only one motor is used -> Z and Z2 sockets are
-  wired **in series on the same driver**.
-=> The two Z motors move together electrically; Klipper cannot align them on its own (Z_TILT_ADJUST needs separate drivers).
-If one side skips (binding), the bed stays tilted until fixed mechanically (power off, turn one lead screw until the bed
-is parallel to the frame, measured at both sides), then screws_tilt_adjust + mesh.
-Checks: photo of the driver chips (4 or 5?), which sockets the two Z motors use, `STEPPER_BUZZ STEPPER=stepper_z`
-(both motors should buzz).
+## Two Z motors (researched 2026-11-13, deeper search)
+How the two Z sockets are wired depends on the board version:
+| Board | Z wiring | Source |
+|---|---|---|
+| X5SA main board schematic (Altium 2019-06, A4982 drivers, non-"mute") | **one Z driver, two sockets JP14 + JP11 in parallel** (each output wire goes to both) | x5sa-main_board-2.pdf (Marlin link), rendered today |
+| Tronxy D01 (same board family) | two Z sockets **in series** on one driver; with one motor, 2 jumpers needed in the 2nd socket | RepRap forum thread 878044 (search snippet) |
+| **CXY-V8-190729 ("mute", 4 x TMC2225)** | "insert 2 jumpers on the Z2 connector" when one motor -> **series on one driver** | Thingiverse 4267636 note; GearBest listing (4 drivers) |
+| Chitu V6 190319 / V9 200420 (X5SA-500, TMC2209) | **separate Z2 driver** PF5/PF1/PF3 -> Klipper `[stepper_z1]` possible | Darkwulf183 Klipper configs; drucktipps #89; Tronxy pin file |
+Our printer.cfg has only `[stepper_z]` -> consistent with one driver.
+
+Consequences for us (V8): both motors get the same steps; they cannot drift electrically, but can drift mechanically
+(one side binds/skips, or a lead screw is turned by hand while unpowered). Klipper cannot correct it
+(`Z_TILT_ADJUST` needs one driver per motor).
+
+Options:
+1. Align once mechanically (power OFF, never unplug motors while powered): turn one lead screw until the bed is parallel
+   to the frame at both sides; printable helper: Thingiverse 4297432 "Tronxy X5SA Z Axis Alignment Fixture". Then
+   SCREWS_TILT_CALCULATE + mesh.
+2. Mechanical sync mod: link both lead screws with GT2 pulleys + closed belt (drucktipps forum user: "beide Z-Achsen
+   mit GT2 60 Scheiben synchronisiert"); keeps them aligned even when unpowered.
+3. Independent motors + `Z_TILT_ADJUST`: only with a 5th driver (other board, e.g. Manta M5P).
+Checks on our board: photo (4 or 5 driver chips, which sockets the Z motors use), `STEPPER_BUZZ STEPPER=stepper_z`.
