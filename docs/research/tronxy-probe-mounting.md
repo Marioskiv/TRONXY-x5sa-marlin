@@ -24,3 +24,12 @@
   exactly over it, note X/Y; move until the sensor centre is over the mark, note X/Y; offset = difference.
 - After changing offsets, re-check `mesh_min`/`mesh_max` (probe coordinates) and `safe_z_home`.
   Smaller offsets = more of the bed can be probed.
+
+## Owner measurement 2026-11-13
+- Nozzle touching the bed, sensor lowered until its LED just lit: sensor face to bed = **~3.5 mm**.
+  -> Effective trigger distance on this bed ~3.5 mm (fits the 2.5-4 mm estimate for aluminium).
+- In that position the sensor triggers exactly when the nozzle touches -> z_offset ~0 -> **no safety margin**
+  (any small variation and the nozzle hits the bed while probing).
+- Fix: sensor face must sit LOWER relative to the nozzle tip: target 1.5-2 mm above the tip
+  -> trigger with the nozzle 2.0-1.5 mm above the bed. Procedure: nozzle at Z=2 (or a 2 mm spacer), lower the sensor
+  until the LED just lights, tighten. Then PROBE_CALIBRATE, PROBE_ACCURACY.
