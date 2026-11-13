@@ -115,3 +115,15 @@ Alternative with fewer turns: raise the low points to the highest (rear middle),
 | rear left | -0.363 | 1:07 CW |
 First check the Z lead-screw alignment (left/right tilt can come from the two Z motors on one driver), and verify the
 turning direction with a small turn + re-run before turning a lot.
+
+## Second SCREWS_TILT_CALCULATE (2026-11-13)
+FL -0.534 (base), FM -0.154, FR +0.026, RR -0.205, RM -0.130, RL -0.436 -> spread 0.56 mm (was 1.28 mm).
+Fewest turns: bring all to the median (-0.179); CW = smaller nozzle gap (raise that point):
+| screw | Z | turn |
+|---|---|---|
+| front left | -0.534 | CW 0:43 |
+| front middle | -0.154 | CCW 0:03 |
+| front right | +0.026 | CCW 0:25 |
+| rear right | -0.205 | CW 0:03 |
+| rear middle | -0.130 | CCW 0:06 |
+| rear left | -0.436 | CW 0:31 |
