@@ -24,3 +24,9 @@ D. Later
 13. `[exclude_object]` + slicer "Label objects" + `BED_MESH_CALIBRATE ADAPTIVE=1 ADAPTIVE_MARGIN=5` in the start macro.
 14. Pressure advance (TUNING_TOWER), input shaper (ringing tower), max_accel.
 15. PLR and power-off: copy from the Kobra Plus config (owner to share), smart plug for the X5SA.
+
+## Order chosen by owner (2026-11-13): no filament loaded yet
+Do now: A1 (config edit), A2 (heat check), A3 hotend PID, **bed PID** (`PID_CALIBRATE HEATER=heater_bed TARGET=60`,
+`SAVE_CONFIG`; the old bed PID is from before the steel PEI plate), B6, C7-C12 (PROBE_CALIBRATE with the nozzle at
+~150 C and the bed at print temperature).
+Later, with filament: A4 (direction), A5 (rotation_distance calibration), then section D.
