@@ -68,3 +68,10 @@ Use: hot bed, `G28`, `SCREWS_TILT_CALCULATE`, turn screws, repeat until all with
   device="printer", state="off")`, triggered by `[delayed_gcode]` from `idle_timeout`, or at print end after the
   hotend has cooled (e.g. `TEMPERATURE_WAIT SENSOR=extruder MAXIMUM=50`).
 - The laptop host stays on (battery), so Klipper reconnects when the printer is powered again.
+
+## Ready-made X5SA screws_tilt_adjust configs found on GitHub (2026-11-13; community, not official Tronxy)
+- justheath/klipper_config `x5sa-config/printer.cfg`: 6 screws, CW-M3 (own head/offsets).
+- dung-adumbs/Klipper_BU `printer_Gemini.cfg` (X5SA): 6 screws at 60/203/335 x 30/315, CW-M3, probe offset 0;
+  its [bed_screws] = 5/165/325 x 5/325 (same as the official Klipper template).
+- iamSiiN/JuggernautX5SA (X5SA-400, Manta M8P), marcin-polo/klipper_tronxy (400 bed, 4 screws): other sizes.
+- All use **CW-M3**. Coordinates always depend on the probe offset -> our version: `klipper-config/screws_tilt_adjust.cfg`.
