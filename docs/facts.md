@@ -45,7 +45,9 @@
 - A motor cable labelled **"Z2"** is plugged into a left-side motor socket -> both Z motors connected (no Z2 jumpers needed).
 - A **5.5 V 1.0 F super-capacitor** is on the board -> probably the energy store for power-loss detection
   (Tronxy pin file: PG2 LM393 output, PG4 reference). Not verified.
-- Driver chip count and the "5V/USB" jumper position: not readable in these photos.
+- Owner: **no driver chip soldered at the E2-MOTOR position** -> 4 drivers (X, Y, Z, E). Both Z motors (Z + Z2 sockets)
+  share the single Z driver; no Z_TILT_ADJUST possible on this board.
+- "5V/USB" jumper position: not readable in these photos.
 
 ## Hotend thermistor (verified 2026-11-13)
 - K2 Plus hotend thermistor measured by owner at room temperature: **~260 kOhm** -> Creality F008 table

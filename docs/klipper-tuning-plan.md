@@ -97,4 +97,5 @@ Options:
 2. Mechanical sync mod: link both lead screws with GT2 pulleys + closed belt (drucktipps forum user: "beide Z-Achsen
    mit GT2 60 Scheiben synchronisiert"); keeps them aligned even when unpowered.
 3. Independent motors + `Z_TILT_ADJUST`: only with a 5th driver (other board, e.g. Manta M5P).
-Checks on our board: photo (4 or 5 driver chips, which sockets the Z motors use), `STEPPER_BUZZ STEPPER=stepper_z`.
+Owner 2026-11-13: E2 driver position is empty (not soldered) -> confirmed 4 drivers; Z + Z2 on one driver.
+Populating the empty footprint (fine-pitch TMC chip + passives) is not recommended. Use options 1 or 2 (or 3 with a new board).
