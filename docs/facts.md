@@ -30,13 +30,22 @@
 - WiFi socket J1 = USART3 (PB10 TX / PB11 RX), pin 2 = 5 V, pin 4 = 3.3 V. Confirmed by the X5SA schematic
   (docs/hardware/wifi-socket.md) AND by Tronxy's own Marlin pin file (PB11 "wifi:TX", PB10 "wifi:RX").
   Two independent sources; still to measure on our V8.
-- MCU is 512 KB (ZET6) – ID 0x0414 also covers 256/384 KB parts. Needs chip photo.
 - WiFi socket supply/logic voltage – needs measurement (ESP8266 is 3.3 V only).
 
 ## Strong evidence (manufacturer code, not yet measured)
 - Power-loss detect PG2 + PG4, I2C EEPROM AT24Cxx on PG0/PG1 (WP PF12), Z max PA13, Z2 driver PF5/PF1/PF3
   (docs/research/tronxy-official-marlin-f103.md).
 - Linear Advance with standalone TMC2208/2225 is unreliable (forum reports); needs UART mod or spreadCycle.
+
+## Board photos (owner, 2026-11-13; docs/hardware/images/board-*.jpg)
+- Silkscreen **CXY-V8-190729 TRONXY** confirmed.
+- MCU marking **STM32F103ZET6** -> 512 KB flash, 64 KB RAM (resolves the 256/384/512 KB question).
+- Main crystal Y2 **8.000** MHz confirmed; second crystal 12.000 MHz next to the USB-serial chip (CH340 needs 12 MHz).
+- **BOOT jumper JP1** next to the X-STOP connector, reset button SW1 beside the crystal.
+- A motor cable labelled **"Z2"** is plugged into a left-side motor socket -> both Z motors connected (no Z2 jumpers needed).
+- A **5.5 V 1.0 F super-capacitor** is on the board -> probably the energy store for power-loss detection
+  (Tronxy pin file: PG2 LM393 output, PG4 reference). Not verified.
+- Driver chip count and the "5V/USB" jumper position: not readable in these photos.
 
 ## Hotend thermistor (verified 2026-11-13)
 - K2 Plus hotend thermistor measured by owner at room temperature: **~260 kOhm** -> Creality F008 table
