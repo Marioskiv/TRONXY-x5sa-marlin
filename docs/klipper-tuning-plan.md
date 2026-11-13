@@ -165,3 +165,13 @@ Median per point (probe coords, rows probed front to back):
   or a time-dependent drift (rows were probed front to back, values fall with time). Not resolved yet.
 - Checks: re-run SCREWS_TILT_CALCULATE now without touching screws; run a 2nd mesh and compare; where are the two
   Z lead screws (front/back or left/right)?
+
+## Sixth SCREWS_TILT_CALCULATE (2026-11-13, no screws touched since the 5th) -> edge effect found
+FL -0.385, FM -0.312, FR -0.005, RR -0.236, RM -0.163, RL -0.284.
+vs 5th run: rear points identical (+-0.014), front points moved -0.19, -0.21, +0.11 without any adjustment.
+The mesh (probe Y=20) shows the front ~0.75 mm higher than the rear, while screws_tilt (probe Y=5) showed front ~ rear.
+Diagnosis (strong hypothesis): **edge effect of the inductive probe**. At probe Y=5 (and probe X=5 for the left screws)
+part of the sensor face is beyond the steel sheet edge -> less metal -> the sensor triggers closer -> reads too low and
+changes with the sheet's exact position. The screw rounds therefore "raised" the front too much.
+Fix: screws_tilt points moved inward (probe 20..310 like the mesh): klipper-config/screws_tilt_adjust.cfg v2.
+Then redo the screws (expect the front screws to go down), then a new mesh.
