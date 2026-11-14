@@ -29,3 +29,20 @@ probe that is outside the part (e.g. a bed corner), so Z is re-measured before r
 ## Plan
 1. First build: PLR in mode 1 (no pin) + ZHOME at a corner, PLR enabled from the menu.
 2. Later: test PG2/PG4 (M43 + unplug test) -> if it works, enable mode 2.
+
+## Klipper on this printer (2026-11-14, owner asked whether the supercap changes things)
+- In Klipper the **state lives on the host**, not on the board. With the host on a laptop **with a battery**, the
+  host keeps running when mains power drops; only the board (MCU) dies. The supercap matters much less than in Marlin.
+- Klipper `virtual_sdcard` logs the file position and the next G-code lines into klippy.log on shutdown
+  (this is what mikeoverbay/klipper-power-loss-recovery reads). Caveat: that position is the *read* position,
+  slightly ahead of the moves actually executed (lookahead queue, ~1-2 s of moves).
+- Optional early warning: Tronxy pin map has `POWER_LOSS_PIN PG2` (LM393 output) and `PG4` (comparator reference,
+  must be HIGH). In Klipper this would be `[output_pin]` PG4 `value: 1` + `[gcode_button]` on `^PG2`.
+  **Not verified on our V8** (circuit may be unpopulated; Tronxy's X5SA_PRO profile had `TRONXY_BACKUP_POWER 0`).
+  Test only by watching `QUERY_BUTTON` while switching mains off, after the owner's OK.
+- What the supercap actually powers on this board: **unknown** (assumption: keeps the MCU alive long enough to save
+  state in Tronxy's stock firmware).
+- Biggest real problem for resume stays mechanical: does the bed sink on the T8 screws when the motors lose power?
+  Owner measurement needed: mark bed height, power off for 5-10 min, check if it moved.
+  - If it does not sink: resume can restore Z from the saved value (SET_KINEMATIC_POSITION), home only X/Y.
+  - If it sinks: Z must be re-measured with the probe at a point outside the part (bed corner).
