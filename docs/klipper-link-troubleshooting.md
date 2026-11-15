@@ -122,3 +122,6 @@ Pi Zero 2 W. Klippy's time-critical work (main thread + serial thread) depends m
 The documented failures of laptops come from desktop distributions (background updates/jobs), disk activity and USB,
 not CPU. So: Debian minimal without desktop, no other services, klipper.service with Nice=-18, ModemManager removed,
 automatic updates off, SSD instead of the old HDD, USB autosuspend off.
+- 2026-11-15, owner asked to swap the N455 for an AMD Turion or Athlon 64 X2 he has: **not possible.** The Atom N455 is
+  soldered (BGA) on an Intel NM10 board; AMD CPUs need an AMD socket and chipset. Not needed either (see above).
+  If those CPUs sit in working laptops/PCs, that machine itself could be the host instead (laptop preferred: battery).
