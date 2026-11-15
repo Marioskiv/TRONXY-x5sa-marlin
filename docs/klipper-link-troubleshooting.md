@@ -63,3 +63,14 @@ Assessment (assumption, not tested on this printer):
   most likely part to fail). Check the battery holds the laptop for at least a few minutes.
 - Settings needed: lid close ignored (`HandleLidSwitch=ignore` in logind), no suspend, USB autosuspend off, Wi-Fi power
   save off; BIOS "power on with AC" probably not available on this netbook (to check in its BIOS).
+
+### Search for real reports (2026-11-15)
+- **No report found** of Klipper on an Atom N450/N455 (or N270) netbook, good or bad. klipper3d.org and
+  klipper.discourse.group are blocked from the cloud session, so only search-result snippets could be read.
+- Indirect, from snippets: a Klipper forum member warned that the usual problem host is "an old laptop ... that has one
+  core, 1GB of DDR"; an Asus Eee PC user found the netbook struggled after also running a heavy browser on it; a Hackaday
+  author runs Klipper + OctoPrint on an old x86 netbook; for a Celeron NUC the advice was "do not run anything in
+  parallel (apart Klipper frontends)". cpubenchmark: N455 single-thread about the same as N450 (~200-280 points, very low).
+- Conclusion: plausible headless, not proven. The decisive test is cheap: Debian minimal + Klipper on the NB250, then a
+  fast print without filament (or the real speeds with input shaper), and read the `Stats` lines in klippy.log
+  (`sysload`, `cputime`, `memavail`) or graph them with `~/klipper/scripts/graphstats.py`. "Timer too close" = too slow.
