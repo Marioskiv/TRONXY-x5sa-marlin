@@ -48,3 +48,17 @@ Owner has the phone connected by USB to this computer. Needs: `adb` (platform-to
 ## Still open (not for this task, but keep in mind)
 Bootloader offset of the current Klipper build (`grep FLASH_START ~/klipper/.config` on the Klipper PC),
 K2 Plus thermistor values, HGX extruder data, WiFi-socket measurements. Hotend will use an external MOSFET module.
+
+## 2026-11-15: new local session on MariosSemina (Windows) for the Toshiba NB250 Klipper host
+Read first: `docs/klipper-link-troubleshooting.md` (sections about the NB250) and `docs/plan-display-ui.md`.
+- Host: Toshiba NB250 (Atom N455, 2 GB, x86_64), Lubuntu = Ubuntu 24.04.2 LTS, user `toshiba`, Wi-Fi 192.168.10.47.
+- SSH works with password from PowerShell. For Claude, use a key (no password prompt): owner runs once in PowerShell
+  `ssh-keygen -t ed25519` and copies the public key to the NB250 (see the chat instructions).
+- `sudo` needs the owner's password: Claude must NOT ask for it in chat; sudo steps are typed by the owner, unless he
+  decides otherwise.
+- Owner rules: Greek answers, explain before every change and wait for OK, facts vs assumptions, notes into this repo
+  (branch claude/hopeful-hypatia-1agoqs), never flash the printer.
+- Step 1 (proposed, waiting OK): apt update + full-upgrade; purge modemmanager; disable unattended-upgrades;
+  `snap refresh --hold`; mask sleep targets + HandleLidSwitch=ignore; `systemctl set-default multi-user.target`; reboot.
+- Step 2: KIAUH -> Klipper, Moonraker, Mainsail; copy printer.cfg from the current Klipper PC (192.168.10.100,
+  instance printer_TRONXY_data); klipper.service `Nice=-18`, `IOSchedulingPriority=1`; USB autosuspend off.
