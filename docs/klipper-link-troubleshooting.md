@@ -136,3 +136,6 @@ automatic updates off, SSD instead of the old HDD, USB autosuspend off.
 - Plan (proposal): keep 24.04 LTS (support to 2029) instead of reinstalling; make it headless with
   `systemctl set-default multi-user.target` (reversible), turn off unattended upgrades during prints, openssh-server for
   access from the local Claude session on the main PC. Prefer a fixed IP (DHCP reservation in the router).
+- SSH from the main PC works (owner, 2026-11-15). Output: default target **graphical.target**; RAM used 716 MiB with the
+  desktop; USB: only card reader + webcam (printer not connected yet); installed: **modemmanager**, **snapd** 2.66.1,
+  **unattended-upgrades** -> all three to be dealt with before Klipper (proposal sent, waiting for OK).
