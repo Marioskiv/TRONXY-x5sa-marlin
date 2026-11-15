@@ -125,3 +125,9 @@ automatic updates off, SSD instead of the old HDD, USB autosuspend off.
 - 2026-11-15, owner asked to swap the N455 for an AMD Turion or Athlon 64 X2 he has: **not possible.** The Atom N455 is
   soldered (BGA) on an Intel NM10 board; AMD CPUs need an AMD socket and chipset. Not needed either (see above).
   If those CPUs sit in working laptops/PCs, that machine itself could be the host instead (laptop preferred: battery).
+
+### NB250 measured by the owner (photos 2026-11-15)
+- Lubuntu (LXQt), GRUB entry "Ubuntu, with Linux 6.11.0-17-generic" -> Ubuntu 24.04 HWE or 24.10 (os-release still to read).
+- `uname -m` = **x86_64**. RAM **1.9 GiB** (already 2 GB, max for this model), swap 511 MiB. Disk /dev/sda1 229 G, 7.5 G used.
+- Network: `enp9s0` (Ethernet) DOWN, `wlp7s0` (Wi-Fi) DOWN at the time of the photo.
+- User `toshiba`, hostname `toshiba-toshibanb250`; password reset via recovery mode (root shell, passwd).
