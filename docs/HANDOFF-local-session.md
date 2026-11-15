@@ -62,3 +62,6 @@ Read first: `docs/klipper-link-troubleshooting.md` (sections about the NB250) an
   `snap refresh --hold`; mask sleep targets + HandleLidSwitch=ignore; `systemctl set-default multi-user.target`; reboot.
 - Step 2: KIAUH -> Klipper, Moonraker, Mainsail; copy printer.cfg from the current Klipper PC (192.168.10.100,
   instance printer_TRONXY_data); klipper.service `Nice=-18`, `IOSchedulingPriority=1`; USB autosuspend off.
+- 2026-11-15: owner chose **sudo without password** for `toshiba` (file /etc/sudoers.d/010_toshiba-nopasswd, like Raspberry Pi
+  OS). Undo: `sudo rm /etc/sudoers.d/010_toshiba-nopasswd`. Conditions: password changed (it appeared in a photo), SSH only on
+  the LAN (no port forwarding); later optionally SSH key-only (PasswordAuthentication no).
