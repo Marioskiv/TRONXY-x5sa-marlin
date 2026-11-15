@@ -46,3 +46,20 @@ The local session already has SSH access to the Klipper PC: run checks 1-4 read-
 ### Plan
 Dedicated old laptop (battery in good shape, not swollen) as the only host for the Tronxy: clean Debian + KIAUH,
 sleep/suspend/lid-close actions disabled, one printer per host (no by-id name clash).
+
+## Candidate host laptop: Toshiba NB250-107 (owner photo of the label, 2026-11-15)
+Label (verified): part PLL2PE-00200WEN, `AN455/1G/250G/10.1WSVT` = Intel **Atom N455**, **1 GB** RAM, **250 GB** HDD,
+10.1" screen, DC 19 V 1.58 A (30 W adapter), Wi-Fi module PA3722U-1MPC, Windows 7 Starter.
+General specs (Intel/Toshiba, from memory, not re-checked here): N455 = 1 core / 2 threads, 1.66 GHz, **64-bit**,
+max RAM 2 GB DDR3 (one SO-DIMM slot), very low power.
+
+Assessment (assumption, not tested on this printer):
+- Klipper's step computation is C code; klippy, Moonraker and nginx are light. A 1 GB / single-core 64-bit host is in
+  the same class as a Raspberry Pi 3 that many printers run on. Run it **headless** (Debian 12/13 amd64 minimal,
+  no desktop), Mainsail opened from another device.
+- Limits: one slow core. Avoid extras on it (timelapse encoding, webcam streaming, KlipperScreen with a desktop).
+  Watch klippy.log for "Timer too close" / high `sysload` during fast prints with input shaper.
+- Cheap upgrades worth doing: RAM to **2 GB DDR3 SO-DIMM** (max), old HDD -> small **SATA SSD** (15-year-old disk is the
+  most likely part to fail). Check the battery holds the laptop for at least a few minutes.
+- Settings needed: lid close ignored (`HandleLidSwitch=ignore` in logind), no suspend, USB autosuspend off, Wi-Fi power
+  save off; BIOS "power on with AC" probably not available on this netbook (to check in its BIOS).
