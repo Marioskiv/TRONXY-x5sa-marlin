@@ -52,3 +52,13 @@ All of this costs flash; final list is decided by the test build size.
 - Marlin host features to enable for a good web UI (standard): EMERGENCY_PARSER, AUTO_REPORT_TEMPERATURES,
   AUTO_REPORT_POSITION, HOST_KEEPALIVE_FEATURE, EXTENDED_CAPABILITIES_REPORT, LONG_FILENAME_HOST_SUPPORT,
   AUTO_REPORT_SD_STATUS, HOST_ACTION_COMMANDS. (To confirm against ESP3D-WEBUI docs at build time.)
+
+## 2026-11-15: phone as screen for the headless NB250 host (owner question)
+Read: KlipperScreen docs/Android.md and docs/Hardware.md (GitHub raw).
+- KlipperScreen on a phone = KlipperScreen **runs on the host** and draws on an X server app on the phone
+  (XServer-XSDL / ViewTouch apk, not on the Play Store), over **Wi-Fi** or **USB (ADB)**. The docs warn: experience may
+  be worse than native, possible **memory leaks** (install earlyoom), VNC recommended instead; with ADB "leaving the phone
+  always connected it's not recommended, remove the battery".
+- On the NB250 this adds a GTK app + X client on the one Atom core -> against the "host does nothing else" rule.
+- Recommended instead (no extra load on the host, only Moonraker API): **Mainsail in the phone's browser** or the
+  **Mobileraker** app, over Wi-Fi. Phone can stay on its charger next to the printer.
