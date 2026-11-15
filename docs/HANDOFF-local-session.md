@@ -67,3 +67,5 @@ Read first: `docs/klipper-link-troubleshooting.md` (sections about the NB250) an
   the LAN (no port forwarding); later optionally SSH key-only (PasswordAuthentication no).
   Note: first named 010_..., but sudoers.d is read in name order and the last match wins; `10-installer` (from the Ubuntu
   installer, rule `(ALL) ALL`) came after it and required the password again. Renamed to `90-...` so it is read last.
+- 2026-11-15 done and verified by the owner: `sudo -n true` -> OK (90-toshiba-nopasswd); SSH key from MariosSemina
+  (Windows, C:\Users\mario\.ssh\id_ed25519) installed; `ssh toshiba@192.168.10.47 hostname` works without password.
