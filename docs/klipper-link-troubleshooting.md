@@ -131,3 +131,8 @@ automatic updates off, SSD instead of the old HDD, USB autosuspend off.
 - `uname -m` = **x86_64**. RAM **1.9 GiB** (already 2 GB, max for this model), swap 511 MiB. Disk /dev/sda1 229 G, 7.5 G used.
 - Network: `enp9s0` (Ethernet) DOWN, `wlp7s0` (Wi-Fi) DOWN at the time of the photo.
 - User `toshiba`, hostname `toshiba-toshibanb250`; password reset via recovery mode (root shell, passwd).
+- os-release: **Ubuntu 24.04.2 LTS (noble)** (Lubuntu). Wi-Fi `wlp7s0` UP **192.168.10.47/24** (same LAN as the current
+  Klipper PC 192.168.10.100). Ethernet not connected.
+- Plan (proposal): keep 24.04 LTS (support to 2029) instead of reinstalling; make it headless with
+  `systemctl set-default multi-user.target` (reversible), turn off unattended upgrades during prints, openssh-server for
+  access from the local Claude session on the main PC. Prefer a fixed IP (DHCP reservation in the router).
