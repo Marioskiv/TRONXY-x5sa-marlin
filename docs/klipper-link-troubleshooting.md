@@ -95,3 +95,30 @@ Forum, Klipper docs site and openbenchmarking are blocked here (owner declined a
   Fine headless; not fine with desktop, browser, webcam or timelapse on the same machine.
 Verdict: very likely adequate for this printer as a headless host (evidence-based estimate, not a test on the NB250).
 Remaining real risks are the 15-year-old parts: HDD, battery, power adapter, USB port.
+
+### Research with the Klipper forum open (2026-11-15, owner allowed the hosts)
+**Same benchmark for all (PassMark cpubenchmark.net, via search snippets, Oct 2026):**
+| CPU | single-thread | all cores |
+|---|---|---|
+| **Atom N455** (NB250) | **266** | 188 |
+| Cortex-A53 4x1.2 GHz (**Pi 3**, recommended) | ~196 | ~266 |
+| Cortex-A53 4x1.0 GHz (**Pi Zero 2 W**, recommended) | ~162-169 | ~198-215 |
+=> per thread the N455 is ~35 % faster than a Pi 3 and ~60 % faster than a Pi Zero 2 W; in total it is about a
+Pi Zero 2 W. Klippy's time-critical work (main thread + serial thread) depends mostly on single-thread speed.
+
+**Klipper forum, read in full:**
+- Sineos (moderator), t/19298 (Eee PC 900 thread): "Klipper itself and most of its ecosystem do not require much CPU
+  power or memory. Anything from the RPi 3 class and above is fully sufficient." and "The Klipper host should only do its
+  host thing and nothing else." (That user switched to a Pi 3 before testing the netbook: no result either way.)
+- Piezo, t/8758 (Timer too close on a Core 2 Solo SU3500 laptop with Linux Mint, CPU 10-15 %): cause was background jobs
+  of the desktop distro saturating the CPU; "An old SU4100 laptop should not have any issues with Klipper if you dedicate
+  it entirely to this task with a lightweight distribution like Debian." "Avoid the single core SBCs like the Raspberry
+  Pi Zero (W)." Hardening tip for /etc/systemd/system/klipper.service: `[Service] Nice=-18 IOSchedulingPriority=1`.
+- Sineos, t/19116 (Fujitsu laptop with Mint, disconnects): "Neither the processing power nor the RAM is relevant for
+  Klipper"; mykepredko: the laptop problem is "execution consistency" of mainstream desktop OSes, not CPU power.
+- Kevin O'Connor, t/2492: a 580 MHz single-core MIPS box with 128 MB (Creality Wi-Fi box) was overloaded (load >100 %)
+  and swapped; "low end host cpus aren't a target for me". The N455 is far above that box.
+**Conclusion:** CPU and RAM of the NB250 are sufficient (above the recommended Pi Zero 2 W per thread, equal in total).
+The documented failures of laptops come from desktop distributions (background updates/jobs), disk activity and USB,
+not CPU. So: Debian minimal without desktop, no other services, klipper.service with Nice=-18, ModemManager removed,
+automatic updates off, SSD instead of the old HDD, USB autosuspend off.
