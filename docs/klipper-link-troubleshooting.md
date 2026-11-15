@@ -74,3 +74,24 @@ Assessment (assumption, not tested on this printer):
 - Conclusion: plausible headless, not proven. The decisive test is cheap: Debian minimal + Klipper on the NB250, then a
   fast print without filament (or the real speeds with input shaper), and read the `Stats` lines in klippy.log
   (`sysload`, `cputime`, `memavail`) or graph them with `~/klipper/scripts/graphstats.py`. "Timer too close" = too slow.
+
+### Deeper research (2026-11-15, owner wants certainty without tests)
+Forum, Klipper docs site and openbenchmarking are blocked here (owner declined allowing them), so: Klipper repo files
+(GitHub raw), GitHub issue search and search-result snippets.
+- **Klipper FAQ (docs/FAQ.md, read in full section):** recommended Pi Zero 2 W, Pi 3, 4, 5; Pi 1, 2 and **Pi Zero 1
+  "don't have enough processing power"** (print stalls). x86 is supported; only hard need is double-precision FP
+  hardware; avoid heavy tasks (defrag, heavy swapping) during prints; disable ModemManager.
+- **Klipper issue #237:** "we have been able to run klipper on old nettop. Atom CPU. Debian linux." -> works (old report,
+  model not given).
+- Klipper forum (snippet): Eee PC 900 host (Celeron M/Atom class) with 2 GB + SSD; the open problem there was networking;
+  a reply doubted the old netbook plus graphics load. No failure due to CPU was reported in the snippet.
+- **Per-core speed:** Phoronix clock-for-clock test: Cortex-A9 roughly matches Atom N450 per clock. Cortex-A53
+  (Pi Zero 2 W 1.0 GHz, Pi 3 1.2 GHz) is about A9 class per clock. => one N455 core at 1.66 GHz is at least one Pi Zero 2 /
+  Pi 3 core, and far above the Pi Zero 1 (ARM11 1 GHz) that the FAQ calls too weak. Openbenchmarking snippet: Atom N270
+  beat the Pi 3 in Himeno (101 vs 71 MFLOPS), lost in GnuPG (61 vs 53 s).
+- **Commercial reference:** Creality K1 runs Klipper (input shaper, 600 mm/s class) on an Ingenic X2000E dual-core MIPS
+  1.2 GHz with **256 MB** RAM (HelixScreen developer page). RAM is not the limit at 1 GB.
+- Difference to a Pi 3: 1 core + Hyper-Threading instead of 4 cores, so Moonraker/nginx share the core with klippy.
+  Fine headless; not fine with desktop, browser, webcam or timelapse on the same machine.
+Verdict: very likely adequate for this printer as a headless host (evidence-based estimate, not a test on the NB250).
+Remaining real risks are the 15-year-old parts: HDD, battery, power adapter, USB port.
