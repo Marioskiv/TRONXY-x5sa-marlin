@@ -62,3 +62,7 @@ Read: KlipperScreen docs/Android.md and docs/Hardware.md (GitHub raw).
 - On the NB250 this adds a GTK app + X client on the one Atom core -> against the "host does nothing else" rule.
 - Recommended instead (no extra load on the host, only Moonraker API): **Mainsail in the phone's browser** or the
   **Mobileraker** app, over Wi-Fi. Phone can stay on its charger next to the printer.
+- Toshiba's own screen (owner asked): a text console costs nothing. KlipperScreen natively on it (X + GTK, mouse/touchpad,
+  no touch) is the normal SBC setup (Pi 3 + HDMI screen) and is much lighter than a browser, but on one Atom core it is the
+  one extra load that could matter at high speed. Assessment, not tested: likely OK with klipper.service Nice=-18;
+  never a desktop or a browser on it. Safest: phone (Mobileraker/Mainsail), laptop lid closed.
